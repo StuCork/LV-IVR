@@ -1,0 +1,39 @@
+GetLVIntent open lv app
+GetLVIntent get lv app
+GetLVIntent get lv
+GetLVIntent open lv
+GetLVIntent open lv ivr
+GetLVIntent get lv ivr
+GetLVIntent open lv ivr app
+
+GetLVProductIntent I want a quote
+GetLVProductIntent I want a motor quote
+GetLVProductIntent I want a motor sales
+GetLVProductIntent Give me a motor quote
+GetLVProductIntent Give me motor sales
+GetLVProductIntent Get me motor sales
+GetLVProductIntent I want a quote on my car
+GetLVProductIntent I want a quote on my motor car
+GetLVProductIntent I want a motor sale
+GetLVProductIntent I want motor sales
+GetLVProductIntent I want motor insurance
+GetLVProductIntent I want new motor sales
+GetLVProductIntent I want new sales
+GetLVProductIntent I want new motor insurance
+
+HelpIntent help
+HelpIntent help me
+HelpIntent what can I ask you
+HelpIntent get help
+HelpIntent to help
+HelpIntent to help me
+HelpIntent what commands can I ask
+HelpIntent what commands can I say
+HelpIntent what can I do
+HelpIntent what can I use this for
+HelpIntent what questions can I ask
+HelpIntent what can you do
+HelpIntent what do you do
+HelpIntent how do I use you
+HelpIntent how can I use you
+HelpIntent what can you tell me
