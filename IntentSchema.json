@@ -1,0 +1,17 @@
+{
+  "intents": [
+    {
+      "intent": "GetLVIntent",
+      "slots": [
+        {
+          "name": "product",
+          "type": "MOTOR SALES"
+        }
+      ]
+    },
+    {
+      "intent": "HelpIntent",
+      "slots": []
+    }
+  ]
+}
