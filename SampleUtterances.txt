@@ -1,10 +1,11 @@
-GetLVIntent open lv app
-GetLVIntent get lv app
-GetLVIntent get lv
-GetLVIntent open lv
-GetLVIntent open lv ivr
-GetLVIntent get lv ivr
-GetLVIntent open lv ivr app
+GetVoiceRouter open Voice Router
+GetVoiceRouter get Voice Router
+GetVoiceRouter get Voice Router app
+GetVoiceRouter open Voice
+GetVoiceRouter open router
+GetVoiceRouter get voice
+GetVoiceRouter open router app
+GetVoiceRouter open Voice app
 
 GetLVProductIntent I want a quote
 GetLVProductIntent I want a motor quote
