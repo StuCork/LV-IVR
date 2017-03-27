@@ -1,76 +1,17 @@
 require('dotenv').load();
 
 var http       = require('http')
-  , AlexaSkill = require('./L.V. Test IVR Interaction')
+  , AlexaSkill = require('./Voice Router')
   , APP_ID     = amzn1.ask.skill.6ec5447c-4d3f-4919-ad4a-db1ac8d48516
   , MTA_KEY    = process.env.MTA_KEY;
 
-var url = function(stopId){
-  return 'http://bustime.mta.info/api/siri/stop-monitoring.json?key=' + MTA_KEY + '&OperatorRef=MTA&MaximumStopVisits=1&MonitoringRef=' + stopId;
-};
 
-var getJsonFromMta = function(stopId, callback){
-  http.get(url(stopId), function(res){
-    var body = '';
-
-    res.on('data', function(data){
-      body += data;
-    });
-
-    res.on('end', function(){
-      var result = JSON.parse(body);
-      callback(result);
-    });
-
-  }).on('error', function(e){
-    console.log('Error: ' + e);
-  });
-};
-
-var handleNextBusRequest = function(intent, session, response){
-  getJsonFromMta(intent.slots.bus.value, function(data){
-    if(data.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit){
-      var text = data
-                  .Siri
-                  .ServiceDelivery
-                  .StopMonitoringDelivery[0]
-                  .MonitoredStopVisit[0]
-                  .MonitoredVehicleJourney
-                  .MonitoredCall
-                  .Extensions
-                  .Distances
-                  .PresentableDistance;
-      var cardText = 'The next bus is: ' + text;
-    } else {
-      var text = 'That bus stop does not exist.'
-      var cardText = text;
-    }
-
-    var heading = 'Next bus for stop: ' + intent.slots.bus.value;
-    response.tellWithCard(text, heading, cardText);
-  });
-};
-
-var BusSchedule = function(){
-  AlexaSkill.call(this, APP_ID);
-};
-
-BusSchedule.prototype = Object.create(AlexaSkill.prototype);
-BusSchedule.prototype.constructor = BusSchedule;
-
-BusSchedule.prototype.eventHandlers.onSessionStarted = function(sessionStartedRequest, session){
-  // What happens when the session starts? Optional
-  console.log("onSessionStarted requestId: " + sessionStartedRequest.requestId
-      + ", sessionId: " + session.sessionId);
-};
-
-BusSchedule.prototype.eventHandlers.onLaunch = function(launchRequest, session, response){
+VoiceRouter.prototype.eventHandlers.onLaunch = function(launchRequest, session, response){
   // This is when they launch the skill but don't specify what they want. Prompt
-  // them for their bus stop
-  var output = 'Welcome to Bus Schedule. ' +
-    'Say the number of a bus stop to get how far the next bus is away.';
+  // them for function type
+  var output = 'Hello and welcome to voice router, what would you like to do today?. ;
 
-  var reprompt = 'Which bus stop do you want to find more about?';
+  var reprompt = 'What would you like to do today, do you want a quote or service your policy?';
 
   response.ask(output, reprompt);
 
@@ -78,19 +19,18 @@ BusSchedule.prototype.eventHandlers.onLaunch = function(launchRequest, session, 
       + ", sessionId: " + session.sessionId);
 };
 
-BusSchedule.prototype.intentHandlers = {
-  GetNextBusIntent: function(intent, session, response){
-    handleNextBusRequest(intent, session, response);
+VoiceRouter.prototype.intentHandlers = {
+  GetProductIntent: function(intent, session, response){
+    handleNextProductRequest(intent, session, response);
   },
 
   HelpIntent: function(intent, session, response){
-    var speechOutput = 'Get the distance from arrival for any NYC bus stop ID. ' +
-      'Which bus stop would you like?';
+    var speechOutput = 'What would you like to do, you can say  a quote, or service my policy?';
     response.ask(speechOutput);
   }
 };
 
 exports.handler = function(event, context) {
-    var skill = new BusSchedule();
+    var skill = new VoiceRouter();
     skill.execute(event, context);
 };
